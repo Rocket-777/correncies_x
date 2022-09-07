@@ -24,6 +24,13 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
         <Selected/>
     </StyledMenuItem>);
 
+    useEffect(()=>{
+        if(!currState.isLoading){
+            const calculated = (parseFloat(currState.fromNumb) * coefficient);
+            const result = isNaN(calculated) ? '' : calculated.toFixed(4);
+            dispatch(updateToNumb(result.toString()));
+        }
+    }, [coefficient])
 
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, fork: 'from' | 'to') {
@@ -56,10 +63,10 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                                 }}>
                         {menuList}
                     </CurrSelect>
-                    <TextFieldContainer key={currState.from}>
+                    <TextFieldContainer >
                         <StyledTextField autoComplete='off' value={currState.fromNumb} onChange={(e) => {
                             handleChange(e, 'from');
-                        }}/>
+                        }} key={coefficient}/>
                         <CurrLabel>
                             {`1 ${currState.from} = ${coefficient.toFixed(4)} ${currState.to}`}
                         </CurrLabel>
@@ -77,7 +84,7 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                                 }}>
                         {menuList}
                     </CurrSelect>
-                    <TextFieldContainer key={currState.to}>
+                    <TextFieldContainer >
                         <StyledTextField value={currState.toNumb}
                                          autoComplete='off' onChange={(e) => {
                             handleChange(e, 'to');
