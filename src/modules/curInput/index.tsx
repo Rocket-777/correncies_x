@@ -24,18 +24,7 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
         <Selected/>
     </StyledMenuItem>);
 
-    useEffect(()=>{
-        const calculated = (parseFloat(currState.fromNumb) * coefficient);
-        const result = isNaN(calculated) ? '' : calculated.toFixed(4);
-        dispatch(updateToNumb(result.toString()));
-    },[currState.from, currState.isLoading])
 
-
-    useEffect(()=>{
-        const calculated = (parseFloat(currState.toNumb) / coefficient);
-        const result = isNaN(calculated) ? '' : calculated.toFixed(4);
-        dispatch(updateFromNumb(result.toString()));
-    }, [currState.to])
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, fork: 'from' | 'to') {
         const numb = e.target.value.replace(/,/g, '.') as string;
