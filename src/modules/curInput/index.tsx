@@ -3,12 +3,11 @@ import {
     MenuProps, StyledSkeleton, HeadLabel, StyledMenuItem
 } from "./styles";
 import {CurrSelect} from "./styles";
-
 import {ReactComponent as DropArrow} from "../../assets/DropArrow.svg"
 import {ReactComponent as Selected} from "../../assets/Selected.svg"
 import {useAppSelector, useAppDispatch} from "../../hooks/hooks";
 import {manageCurrencySlice} from "../../store/slices/curSlice";
-import {ChangeEvent, FC} from "react"
+import {ChangeEvent, FC, useEffect} from "react"
 
 interface ICurInpProps {
     type: 'from' | 'to'
@@ -24,6 +23,19 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
         {item}
         <Selected/>
     </StyledMenuItem>);
+
+    useEffect(()=>{
+        const calculated = (parseFloat(currState.fromNumb) * coefficient);
+        const result = isNaN(calculated) ? '' : calculated.toFixed(4);
+        dispatch(updateToNumb(result.toString()));
+    },[currState.from, currState.isLoading])
+
+
+    useEffect(()=>{
+        const calculated = (parseFloat(currState.toNumb) / coefficient);
+        const result = isNaN(calculated) ? '' : calculated.toFixed(4);
+        dispatch(updateFromNumb(result.toString()));
+    }, [currState.to])
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, fork: 'from' | 'to') {
         const numb = e.target.value.replace(/,/g, '.') as string;
@@ -55,7 +67,7 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                                 }}>
                         {menuList}
                     </CurrSelect>
-                    <TextFieldContainer>
+                    <TextFieldContainer key={currState.from}>
                         <StyledTextField autoComplete='off' value={currState.fromNumb} onChange={(e) => {
                             handleChange(e, 'from');
                         }}/>
@@ -76,7 +88,7 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                                 }}>
                         {menuList}
                     </CurrSelect>
-                    <TextFieldContainer>
+                    <TextFieldContainer key={currState.to}>
                         <StyledTextField value={currState.toNumb}
                                          autoComplete='off' onChange={(e) => {
                             handleChange(e, 'to');

@@ -5,13 +5,15 @@ import {CurInp} from "../curInput";
 import {useEffect} from "react";
 import {fetchData} from "../../store/slices/ActionThunk";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-
 function Layout() {
     const dispatch = useAppDispatch();
-    const currState = useAppSelector(state => state.currencyManage)
+    const currState = useAppSelector(state => state.currencyManage);
+
+
     useEffect(() => {
-        dispatch(fetchData(currState.from));
+        dispatch(fetchData(currState.from))
     }, [currState.from])
+
 
     return (
         <Container>
