@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/correncies_x/static/css/main.75af9cb3.css",
-    "main.js": "/correncies_x/static/js/main.a34ee174.js",
+    "main.js": "/correncies_x/static/js/main.ec4ac66e.js",
     "index.html": "/correncies_x/index.html",
     "static/media/DropArrow.svg": "/correncies_x/static/media/DropArrow.f8664f5fe2b2dbc30525c9cfb2f25897.svg",
     "main.75af9cb3.css.map": "/correncies_x/static/css/main.75af9cb3.css.map",
-    "main.a34ee174.js.map": "/correncies_x/static/js/main.a34ee174.js.map"
+    "main.ec4ac66e.js.map": "/correncies_x/static/js/main.ec4ac66e.js.map"
   },
   "entrypoints": [
     "static/css/main.75af9cb3.css",
-    "static/js/main.a34ee174.js"
+    "static/js/main.ec4ac66e.js"
   ]
 }
