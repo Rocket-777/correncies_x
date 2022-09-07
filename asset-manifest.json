@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/correncies_x/static/css/main.75af9cb3.css",
-    "main.js": "/correncies_x/static/js/main.91d69dac.js",
+    "main.js": "/correncies_x/static/js/main.20bb3cf8.js",
     "index.html": "/correncies_x/index.html",
     "static/media/Selected.svg": "/correncies_x/static/media/Selected.7023ee4a2f521ec651180318310355b2.svg",
     "static/media/DropArrow.svg": "/correncies_x/static/media/DropArrow.f8664f5fe2b2dbc30525c9cfb2f25897.svg",
     "main.75af9cb3.css.map": "/correncies_x/static/css/main.75af9cb3.css.map",
-    "main.91d69dac.js.map": "/correncies_x/static/js/main.91d69dac.js.map"
+    "main.20bb3cf8.js.map": "/correncies_x/static/js/main.20bb3cf8.js.map"
   },
   "entrypoints": [
     "static/css/main.75af9cb3.css",
-    "static/js/main.91d69dac.js"
+    "static/js/main.20bb3cf8.js"
   ]
 }
