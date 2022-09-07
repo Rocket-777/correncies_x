@@ -1,6 +1,6 @@
 import {styled} from "@mui/system";
 import TextField from '@mui/material/TextField';
-import {Select, FormControl, Skeleton, Typography} from "@mui/material";
+import {Select, FormControl, Skeleton, Typography, MenuItem} from "@mui/material";
 
 const StyledSkeleton = styled(Skeleton)`
   width: 400px;
@@ -75,11 +75,16 @@ const CurrSelect = styled(Select)`
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
+
   div.MuiSelect-select {
     display: flex;
     align-items: center;
     padding: 0 0 0 15px;
     height: 100%;
+
+    svg {
+      visibility: hidden;
+    }
   }
 
   &.Mui-focused {
@@ -139,10 +144,29 @@ const MenuProps = {
         },
         "*::-webkit-scrollbar": {
             width: "5px"
-        }
+        },
 
     }
 }
+
+const StyledMenuItem = styled(MenuItem)`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  &.Mui-selected {
+    svg {
+      margin-right: 0;
+      margin-left: auto;
+      visibility: visible;
+    }
+  }
+
+  svg {
+    visibility: hidden;
+  }
+
+`
 
 const HeadLabel = styled(Typography)`
   position: absolute;
@@ -152,7 +176,9 @@ const HeadLabel = styled(Typography)`
   font-size: 20px;
 `
 
-export {StyledTextField, InputBase, CurrSelect, CurrLabel,
-    TextFieldContainer, MenuProps, StyledSkeleton, HeadLabel}
+export {
+    StyledTextField, InputBase, CurrSelect, CurrLabel,
+    TextFieldContainer, MenuProps, StyledSkeleton, HeadLabel, StyledMenuItem
+}
 
 

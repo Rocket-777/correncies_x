@@ -6,6 +6,7 @@ interface manageCurrencyState{
     from: string,
     fromNumb: string,
     to: string,
+    toNumb: string,
     isLoading: boolean,
     error: string
 }
@@ -16,6 +17,7 @@ const initialState: manageCurrencyState = {
     from: 'RUB',
     fromNumb: '',
     to: 'USD',
+    toNumb: '',
     isLoading: true,
     error: ''
 }
@@ -44,11 +46,15 @@ export const manageCurrencySlice = createSlice({
         updateFromNumb(state, action: PayloadAction<string>) {
             state.fromNumb = action.payload
         },
-        swapCurrencies(state){
+        updateToNumb(state, action: PayloadAction<string>){
+            state.toNumb = action.payload
+        },
+        swapCurrencies(state, action: PayloadAction<number>){
             const from = state.from;
             state.from = state.to;
             state.to = from;
-
+            const result = (parseFloat(state.fromNumb) / action.payload);
+            state.toNumb = isNaN(result) ? '' : result.toFixed(4);
         }
     }
 })

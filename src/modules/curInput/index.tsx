@@ -1,28 +1,46 @@
 import {
     StyledTextField, InputBase, CurrLabel, TextFieldContainer,
-    MenuProps, StyledSkeleton, HeadLabel
+    MenuProps, StyledSkeleton, HeadLabel, StyledMenuItem
 } from "./styles";
 import {CurrSelect} from "./styles";
-import {MenuItem} from "@mui/material";
+
 import {ReactComponent as DropArrow} from "../../assets/DropArrow.svg"
+import {ReactComponent as Selected} from "../../assets/Selected.svg"
 import {useAppSelector, useAppDispatch} from "../../hooks/hooks";
 import {manageCurrencySlice} from "../../store/slices/curSlice";
-import {FC} from "react"
+import {ChangeEvent, FC} from "react"
 
 interface ICurInpProps {
     type: 'from' | 'to'
 }
-
 export const CurInp: FC<ICurInpProps> = ({type}) => {
     const currState = useAppSelector(state => state.currencyManage)
     const dispatch = useAppDispatch();
-    const {changeFrom, changeTo, updateFromNumb} = manageCurrencySlice.actions;
+    const {changeFrom, changeTo, updateFromNumb, updateToNumb} = manageCurrencySlice.actions;
     const selectArray = Object.keys(currState.currencyData);
     const coefficient = currState.currencyData[currState.to];
-    const toValue = coefficient * parseFloat(currState.fromNumb.replace(/,/g, '.'));
-    const menuList = selectArray.map(item => <MenuItem value={item} key={item}>
+
+    const menuList = selectArray.map(item => <StyledMenuItem value={item} key={item}>
         {item}
-    </MenuItem>);
+        <Selected/>
+    </StyledMenuItem>);
+
+    function handleChange(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, fork: 'from' | 'to') {
+        const numb = e.target.value.replace(/,/g, '.') as string;
+        if (fork === 'from') {
+            const calculated = (parseFloat(numb) * coefficient);
+            const result = isNaN(calculated) ? '' : calculated.toFixed(4);
+            dispatch(updateFromNumb(isNaN(parseFloat(numb)) ? '' : numb));
+            dispatch(updateToNumb(result.toString()));
+        }
+        if (fork === 'to') {
+            const calculated = (parseFloat(numb) / coefficient);
+            const result = isNaN(calculated) ? '' : calculated.toFixed(4)
+            dispatch(updateToNumb(isNaN(parseFloat(numb)) ? '' : numb));
+            dispatch(updateFromNumb(result.toString()));
+        }
+
+    }
 
     if (!currState.isLoading) {
         if (type === 'from')
@@ -39,8 +57,7 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                     </CurrSelect>
                     <TextFieldContainer>
                         <StyledTextField autoComplete='off' value={currState.fromNumb} onChange={(e) => {
-                            const numb = e.target.value as string
-                            dispatch(updateFromNumb(isNaN(parseInt(numb)) ? '' : numb))
+                            handleChange(e, 'from');
                         }}/>
                         <CurrLabel>
                             {`1 ${currState.from} = ${coefficient.toFixed(4)} ${currState.to}`}
@@ -60,7 +77,10 @@ export const CurInp: FC<ICurInpProps> = ({type}) => {
                         {menuList}
                     </CurrSelect>
                     <TextFieldContainer>
-                        <StyledTextField aria-readonly value={isNaN(toValue) ? '' : toValue.toFixed(4)}/>
+                        <StyledTextField value={currState.toNumb}
+                                         autoComplete='off' onChange={(e) => {
+                            handleChange(e, 'to');
+                        }}/>
                         <CurrLabel>
                             {`1 ${currState.to} = ${(1 / coefficient).toFixed(4)} ${currState.from}`}
                         </CurrLabel>

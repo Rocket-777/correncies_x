@@ -5,6 +5,7 @@ import {CurInp} from "../curInput";
 import {useEffect} from "react";
 import {fetchData} from "../../store/slices/ActionThunk";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+
 function Layout() {
     const dispatch = useAppDispatch();
     const currState = useAppSelector(state => state.currencyManage)
