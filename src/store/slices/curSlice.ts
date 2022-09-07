@@ -6,7 +6,6 @@ interface manageCurrencyState{
     from: string,
     fromNumb: string,
     to: string,
-    coef: number
     toNumb: string,
     isLoading: boolean,
     error: string
@@ -19,7 +18,6 @@ const initialState: manageCurrencyState = {
     fromNumb: '',
     to: 'USD',
     toNumb: '',
-    coef: 0,
     isLoading: true,
     error: ''
 }
@@ -33,7 +31,6 @@ export const manageCurrencySlice = createSlice({
         },
         fetchingDataSuccess(state, action: PayloadAction<any>){
             state.currencyData = action.payload;
-            state.coef = action.payload[state.to];
             state.isLoading = false;
         },
         fetchingFailed(state, action: PayloadAction<string>){
