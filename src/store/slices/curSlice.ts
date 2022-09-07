@@ -29,7 +29,7 @@ export const manageCurrencySlice = createSlice({
         fetchingData(state){
             state.isLoading = true;
         },
-        fetchingDataSuccess(state, action: PayloadAction<any>){
+        fetchingDataSuccess(state, action: PayloadAction<Object>){
             state.currencyData = action.payload;
             state.isLoading = false;
         },
