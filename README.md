@@ -7,4 +7,6 @@
         
     used https://exchangerate.host currencies api
 
+### Live demo https://rocket-777.github.io/correncies_x/
+
 

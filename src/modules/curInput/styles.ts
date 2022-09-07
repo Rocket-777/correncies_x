@@ -1,6 +1,6 @@
 import {styled} from "@mui/system";
 import TextField from '@mui/material/TextField';
-import {Select, FormControl, Skeleton} from "@mui/material";
+import {Select, FormControl, Skeleton, Typography} from "@mui/material";
 
 const StyledSkeleton = styled(Skeleton)`
   width: 400px;
@@ -8,8 +8,9 @@ const StyledSkeleton = styled(Skeleton)`
   border-radius: 8px;
   transform: none;
   background-color: rgba(110, 110, 110, 0.11);
-  ::after{
-    background: linear-gradient( 260deg, rgb(203 203 203 / 1%), rgb(255 255 255 / 75%), rgb(223 223 223 / 4%) );
+
+  ::after {
+    background: linear-gradient(260deg, rgb(203 203 203 / 1%), rgb(255 255 255 / 75%), rgb(223 223 223 / 4%));
     animation-duration: 0.8s;
     animation-delay: 0s;
   }
@@ -70,7 +71,10 @@ const InputBase = styled(FormControl)`
 const CurrSelect = styled(Select)`
   height: 44px;
   border-radius: 8px 8px 0 0;
-
+  color: #71767A;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
   div.MuiSelect-select {
     display: flex;
     align-items: center;
@@ -140,7 +144,15 @@ const MenuProps = {
     }
 }
 
+const HeadLabel = styled(Typography)`
+  position: absolute;
+  top: -36px;
+  color: #71767A;
+  font-weight: 400;
+  font-size: 20px;
+`
 
-export {StyledTextField, InputBase, CurrSelect, CurrLabel, TextFieldContainer, MenuProps, StyledSkeleton}
+export {StyledTextField, InputBase, CurrSelect, CurrLabel,
+    TextFieldContainer, MenuProps, StyledSkeleton, HeadLabel}
 
 
